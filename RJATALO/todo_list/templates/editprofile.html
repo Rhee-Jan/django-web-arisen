@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+	<button class="btn btn-secondary m-5" type="submit"><a style="color: #fff" href="{%url 'home' %}">Back</a></button>
+	{% if messages %}
+  	<ul class ="messages">
+   	 {% for message in messages %}
+     	 <li{% if message.tags %} class = "{{ message.tags }}" {% endif %}> {{ message }} </li>
+    	  {% endfor %}
+  	</ul>
+	{% endif %}
+
+
+	
+	<center><h3><b><i>Edit Profile</i></b></h3></center>
+	<form class="form m-5" method="POST">
+	{% csrf_token %}
+	
+
+	<p><label for="id_first_name">First name:</label> <input type="text" name="first_name" value ="{{ data.first_name }}" maxlength="100" required id="id_first_name"></p>
+	<p><label for="id_last_name">Last name:</label> <input type="text" name="last_name" value ="{{ data.last_name }}" maxlength="100" required id="id_last_name"></p>
+	
+	<p><label for="id_gender">Gender:</label> <input type="text" name="gender" value ="{{ data.gender }}" maxlength="100" required id="id_gender"></p>
+	<p><label for="id_age">Age:</label> <input type="text" name="age" value ="{{ data.age }}" maxlength="100" required id="id_age"></p>
+	
+	
+
+
+
+
+
+
+
+
+
+
+	<button class="btn btn-secondary" type="submit">Save</button>
+	
+
+
+	</button></form>
+
+
+
+
+
+{%endblock%}

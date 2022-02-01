@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br></br>
+	<center><b><i>   List of Alumni </i></b></center>
+	<!--
+	<div class="form-inline my-2 my-lg-0">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{%url 'addprofile'%}">Add New Alumi</a></button>
+	</div>	-->
+	<button class = "btn btn-secondary text-left m-5"><a style="color: #fff"href="{%url 'addprofile' %}">Add New Alumni</a></button>
+
+	<ul class="messages">
+	  {% for message in messages %} {% if message %}
+	    <center style="color: green"><i>   {{ message }} </i></center>
+	  {% endif %} {% endfor %}
+	</ul>
+
+
+	<form class = "text-right m-5" method="POST" action="{%url 'namesearch' %}">
+		{% csrf_token %}
+		<p>
+		<input type="text" name="name"  maxlength="100" placeholder="search alumni ID">
+		<button class="btn btn-secondary md-10" type="submit"> Search </button>
+
+		</p>
+	<form>
+	
+	{% if data %}
+	<center class="table-responsive"><table class="table ">
+		<thead>
+			<tr class ="table-bordered">
+				<th class ="table-bordered">ID</th>
+				<th class ="table-bordered">First Name</th>
+				<th class ="table-bordered">Last Name</th>
+				<th class ="table-bordered">Gender</th>
+				<th class ="table-bordered">Age</th>
+				<th class ="table-bordered">Actions</th>
+				<th class ="table-bordered"></th>
+			</tr>
+		</thead>
+			<tr class ="table-bordered">
+				{% for things in data %}
+				<td class ="table-bordered">{{ things.id }}</td>
+				<td class ="table-bordered">{{ things.first_name }}</td>
+				<td class ="table-bordered">{{ things.last_name }}</td>
+				<td class ="table-bordered">{{ things.gender }}</td>
+				<td class ="table-bordered">{{ things.age }}</td>
+				<td class ="table-bordered"><button class="btn btn-secondary my-2 my-sm-0" type="submit"><a style="color: #fff" href="{%url 'editprof' things.id %}">Edit</a></button></td>
+				<td class ="table-bordered"><button class="btn btn-secondary my-2 my-sm-0" type="submit"><a style="color: #fff" href="{%url 'delete' things.id %}">Delete</a></button></td>
+			</tr>
+			{% endfor %}
+	</table></center>
+	{% else %}
+	<center style="color:#ff0000"><b><i>   No Alumni Data yet click "Add New Alumni" to add </i></b></center>
+	{% endif %}
+	
+{% endblock %}
+
+

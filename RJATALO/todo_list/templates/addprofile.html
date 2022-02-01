@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+	<button class="btn btn-secondary m-5" type="submit"><a style="color: #fff" href="{%url 'home' %}">Back</a></button>
+	{% if messages %}
+	
+  	<ul class ="messages">
+   	 {% for message in messages %}
+     	 <li{% if message.tags %} class = "{{ message.tags }}" {% endif %}> {{ message }} </li>
+    	  {% endfor %}
+  	</ul>
+	{% endif %}
+
+
+	
+	<center><h3><b><i>Add New Alumni</i></b></h3></center>
+	<form  class="form m-5"method="POST"> <!-- class="form-inline my-2 my-lg-0" -->
+	{% csrf_token %}
+	
+
+	{{ form.as_p }}
+
+	<button class="btn btn-secondary" type="submit">Save</button>
+	</form>
+
+<!-- <input type="radio" id="profile_choice_1" name="profile_type" value="Patient">
+<label for="profile_choice_1">Patient</label><br>
+<input type="radio" id="profile_choice_2" name="profile_type" value="Employee">
+<label for="profile_choice_1">Employee</label><br> -->
+
+
+
+{%endblock%}
